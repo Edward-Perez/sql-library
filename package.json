@@ -5,7 +5,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "author": "Edward Perez",
   "license": "ISC",
@@ -15,5 +16,8 @@
     "sequelize": "^5.8.7",
     "sequelize-cli": "^5.4.0",
     "sqlite3": "^4.0.8"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
