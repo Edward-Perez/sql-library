@@ -2,11 +2,12 @@ const express = require('express');
 const app = express();
 const routes = require('./routes/index.js');
 const port = 3000;
+ 
 
 // Template engine set to Pug
 app.set('view engine', 'pug');
 // Static files set to public folder
-app.use('/static', express.static('public'));
+app.use(express.static(__dirname + '/public'));
 // Routes
 app.use(routes);
 
