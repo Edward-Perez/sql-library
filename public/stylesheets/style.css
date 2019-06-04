@@ -1,40 +1,48 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 body {
   padding: 10px 50px 50px;
   font: 18px "Garamond", serif;
+  color: rgb(236, 235, 235);
+  background-image: url("../img/library.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 a {
-  color: #019875;
+  color: white;
   text-decoration: none;
-  font-weight: bold;
-  transition: 0.4s;
+  border-bottom: 2px solid rgba(202, 202, 202, 0.5);
+  padding-bottom: 1px;
 }
 
   a:hover {
-    color: black;
+    color: rgb(255, 255, 255);
+    font-size: 18.15px;
   }
 
 a.button, input[type=submit] {
-  color: white;
-  background: #019875;
+  background: transparent;
   font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
-  padding: 10px 14px 12px;
-  font-size: 14px;
-  border-radius: 2px;
+  font-size: 20px;
   cursor: pointer;
 }
 
 form a.button, input[type=submit] {
   margin-left: 140px;
-  transition: 0.4s;
 }
 
 input[type=submit] {
+  color: white;
   border: 0;
 }
 
   a.button:hover, input[type=submit]:hover {
-    background-color: #01b189;
+    color: #ffffff;
+    font-size: 20.15px;
   }
 
 p {
@@ -54,9 +62,10 @@ h2 {
 }
 
 th {
-  border-bottom: 2px solid #D8B493;
+  color: white;
+  border-bottom: 2px solid rgb(223, 223, 223);
   text-align: left;
-  padding: 5px 20px 5px 10px;
+  padding: 5px 20px 20px 10px;
 }
 
 tr {
@@ -64,11 +73,11 @@ tr {
 }
 
 tr:nth-child(2n) {
-  background: #E7E7E7;
+  background-color: rgba(0, 0, 0, 0.5); 
 }
 
 td {
-  padding: 5px 20px 5px 10px;
+  padding: 10px 20px 5px 10px;
 }
 
 label {
@@ -93,5 +102,81 @@ input[type=text] {
 }
 
 .error {
-  color: rgb(236, 15, 15);
+  color: rgb(255, 146, 146);
+  font-size: 20px;
 }
+
+.searchBtn {
+  padding: 10px;
+  font-family: "Lucida Grande", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  color: white;
+  border: none;
+  background: rgba(73, 73, 73, 0.5);
+  transition: 0.4s;
+}
+
+.searchBtn:hover{
+  color: gainsboro;
+}
+
+.books-form {
+  display: inline-block;
+}
+
+.table {
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5); 
+}
+
+#search-bar {
+  float: right;
+}
+#search-bar input {
+  max-width: 170px;
+  color: rgb(223, 221, 221);
+  border: none;
+  background: rgba(73, 73, 73, 0.5);
+}
+
+.book-detail input{
+  max-width: 250px;
+  color: rgb(235, 232, 232);
+  border: none;
+  background: rgba(73, 73, 73, 0.5);
+}
+
+#update {
+  background-color: transparent;
+}
+
+#links{
+  max-width: 100%;
+}
+
+#page-links {
+  list-style: none; 
+  overflow: auto;
+  max-width: 50%;
+  margin: 2% auto;
+}
+
+#page-links li {
+  display: inline;
+  margin: 0 .8em;
+}
+#page-links li a {
+  color: #fff;
+  text-decoration: none;
+  /* margin-right: 10em; */
+  padding: 5px 10px;
+}
+
+#page-links li a:hover {
+  color: #616060;
+}
+
+#page-links li a.active {
+  border: 1px solid gold;
+} 
+
