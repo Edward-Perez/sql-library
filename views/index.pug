@@ -1,0 +1,32 @@
+extends layout
+block content
+
+  h1 Books
+  p.books-form
+    a.button(href='/books/new') Create New Book
+    form#search-bar(method='GET', action='/search')
+      input(name='keyword', type='text', placeholder='Search...')
+      button.searchBtn(type='submit') Search
+  table.table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+    each book in Book
+      tr
+        td
+          a(href=`/books/${book.id}`) #{book.title}
+        td #{book.author}
+        td #{book.genre}
+        td #{book.year}
+  div#links
+    ul#page-links
+      - for (var i=0; i < Count; i++)
+        li
+          a(class=(Page === i) ? 'active' : '',
+            href=`/books/page/${i}`)= i + 1
+
+        
