@@ -10,6 +10,9 @@ module.exports = {
     let pageLimit = 5;
     Book.findAndCountAll( { offset: page * pageLimit | 0, limit: pageLimit})
       .then( Book => { 
+        if ((Book.rows).length === 0) { 
+           return next(err); 
+        }
         res.render('index', {
         pageTitle: 'Books', 
         Book: Book.rows,
@@ -17,8 +20,9 @@ module.exports = {
         Page: page  | 0
         });
       })
-      .catch(err => console.log(err))
+      .catch(err => next({err, status: 500 }))
   },
+
 
   ////////// Search Books //////////
   searchBooks: (req, res) => {
@@ -39,13 +43,16 @@ module.exports = {
       } 
       res.render('search-results', { pageTitle: 'Search', Books } )
     })
-    .catch(err => console.log(err))
+    .catch(err => next(err))
   },
+
+
   ////////// New Book Form //////////
   getNewBooks: (req, res, next) => {
     res.render('new-book', { pageTitle : 'New Book' });
   },
 
+  ////////// Create New Book / Post Request //////////
   postCreateBooks: (req, res, next) => {
     const input = req.body;
     Book.create(input)
@@ -60,19 +67,20 @@ module.exports = {
           throw err;
         }
       })
-      .catch(err => console.log(err))
+      .catch(err => next(err))
   },
 
-  ////////// Update Book Form //////////
+  ////////// Update Book Form / Get Request //////////
   getBookDetails: (req, res, next) => {
     const {id} = req.params;
     Book.findByPk(id)
       .then( Book => {
         res.render('update-book', { pageTitle: Book.title, Book });
       })
-      .catch(err => {next(err)});
+      .catch(err => next(err));
   },
 
+  ////////// Update Book Form / Post Request //////////
   postUpdateDetails: (req, res, next) => {
     const {id} = req.params;
     const input = req.body;
@@ -85,23 +93,24 @@ module.exports = {
               const errorMsg = (err.errors).map((arg) => arg.message);
               res.render('update-book', { Book, input, errorMsg });
             } else {
-            throw err;
+            next(err);
           }
         })
-        .catch(err => console.log(err))
+        .catch(err => next(err))
       })
-      .catch(err => console.log(err));
+      .catch(err => next(err))
   },
 
+  ////////// Delete Book Form / Post Request //////////
   postDeleteUpdates: (req, res, next) => {
     const {id} = req.params;
     Book.findByPk(id)
       .then( Book => {
         Book.destroy()
           .then(() => res.redirect('/books'))
-          .catch( err => console.log(err))
+          .catch( err => next(err))
       })
-      .catch(err => console.log(err));
+      .catch(err => next(err));
   }
 
 };
