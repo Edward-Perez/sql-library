@@ -42,9 +42,9 @@ db.sync()
     if (err.status === 404) {
       console.error('Error message:', err.message);
       res.render('page-not-found', {
-        err, 
+        err,
         pageTitle: '404',
-        status: err.status
+        status: 404 
       });
     } else {
       console.error('Error message:', err.message);
