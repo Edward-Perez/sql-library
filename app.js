@@ -30,17 +30,30 @@ db.sync()
   })
   .catch((err) => console.log(err))
 
-  // 404 Route
+  // 404 Error
   app.use( (req, res, next) => {
-    res.locals.title = '404';
-    res.render('page-not-found');
+    const err = new Error('Not Found');
+    err.status = 404;
+    next(err);
   }); 
   
-  // Error Route 
+  // Error Handler
   app.use( (err, req, res, next) => {
-    res.locals.pageTitle = 'Error';
-    console.error('MAINNN ERRORRRR', err.stack);
-    res.render('error', { err });
+    if (err.status === 404) {
+      console.error('Error message:', err.message);
+      res.render('page-not-found', {
+        err, 
+        pageTitle: '404',
+        status: err.status
+      });
+    } else {
+      console.error('Error message:', err.message);
+      res.render('error', { 
+        err,
+        pageTitle: 'Error',
+        status: 500
+       });
+    }
   }); 
 
 
