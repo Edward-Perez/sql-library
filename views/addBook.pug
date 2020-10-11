@@ -1,0 +1,26 @@
+extends layout.pug
+block content
+
+    .editor
+        h1.editor__title Add Book
+        if errorMsg
+            include errorMessages.pug
+        form.editor__form(method='POST' action='/books/add')
+            ul
+                li
+                    label(for='title') Title
+                    input#title.editor__input(name='title', type='text' value=`${errorMsg ? input.title : ''}`)
+                li
+                    label(for='author') Author
+                    input#author.editor__input(name='author', type='text' value=`${errorMsg ? input.author : ''}`)
+                li
+                    label(for='genre') Genre
+                    input#genre.editor__input(name='genre', type='text' value=`${errorMsg ? input.genre : ''}`)
+                li
+                    label(for='year') Year
+                    input#year.editor__input(name='year', type='text' value=`${errorMsg ? input.year : ''}`)
+                li
+                    .editor__button
+                        button(type='submit') Add
+                        button
+                            a(class='' href="/") Cancel
