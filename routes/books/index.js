@@ -18,10 +18,15 @@ router.post('/:bookId/delete', book.getBookById, book.delete);
 
 router.use((err, req, res, next) => {
     if(err.name === "SequelizeValidationError") {
-        req.userErrors = err.errors.map(arg => arg.message)
-        if (req.path === "/add") book.showAddForm(req, res);
-        else if (req.path === "/edit") book.showEditForm(req, res);
-        else next(err);
+        req.userErrors = err.errors.map(arg => arg.message);
+        
+        if (req.path === "/add") {
+            book.showAddForm(req, res)
+        } else if (req.path === "/edit") {
+            book.showEditForm(req, res);
+        } else {
+            next(err);
+        }
     } 
     else {
         next(err);
