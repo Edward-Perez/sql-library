@@ -4,7 +4,17 @@ html
     meta(charset='utf-8')
     meta(http-equiv='x-ua-compatible', content='ie=edge')
     meta(name='viewport', content='width=device-width, initial-scale=1.0')
-    title #{pageTitle}
-    link(href='/stylesheets/style.css', rel='stylesheet')
+    link(href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css", rel="stylesheet")
+    link(rel='stylesheet', href='/static/styles.css')
   body
-    block content
+    header.header 
+        h1.logo Books Library
+        .nav  
+          a.nav__link(href='/') Home
+          a.nav__link(href='/books/add') Add Book
+        form.search(method='GET' action='/books/search')
+          input.search__input(name='keyword' type='text' placeholder='Search...')
+          button.search__button(name="page" value="0" type='submit')
+            i.fa.fa-search
+    .content
+      block content
