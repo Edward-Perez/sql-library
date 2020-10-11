@@ -1,0 +1,26 @@
+extends layout.pug
+block content
+
+  if results.length
+    .table-container  
+      h1.search-title Search Results
+      table.table
+        thead
+          tr
+            th Title
+            th Author
+            th Genre
+            th Year
+        tbody
+        each book in results
+          tr.table__row
+            td #{book.author}
+            td #{book.genre}
+            td #{book.year}
+            td
+              button.table__button
+                a(href=`/books/${book.id}`) EDIT
+  else 
+    h1.not-found Sorry, no match found
+
+        
