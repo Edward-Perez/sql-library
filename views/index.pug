@@ -1,32 +1,25 @@
-extends layout
+extends layout.pug
 block content
-
-  h1 Books
-  p.books-form
-    a.button(href='/books/new') Create New Book
-    form#search-bar(method='GET', action='/search')
-      input(name='keyword', type='text', placeholder='Search...')
-      button.searchBtn(type='submit') Search
-  table.table
-    thead
-      tr
-        th Title
-        th Author
-        th Genre
-        th Year
-    tbody
-    each book in Book
-      tr
-        td
-          a(href=`/books/${book.id}`) #{book.title}
-        td #{book.author}
-        td #{book.genre}
-        td #{book.year}
-  div#links
-    ul#page-links
-      - for (var i=0; i < Count; i++)
-        li
-          a(class=(Page === i) ? 'active' : '',
-            href=`/books/page/${i}`)= i + 1
-
-        
+  .table-container
+    table.table
+      thead
+        tr
+          th Title
+          th Author
+          th Genre
+          th Year
+          th
+      tbody
+      each book in books
+        tr.table__row
+          td #{book.title}
+          td #{book.author}
+          td #{book.genre}
+          td #{book.year}
+          td
+            button.table__button
+              a(href=`/books/${book.id}/edit`) EDIT
+    ul.table__pagination
+      - for (var i = 1; i <= anchorLinksNeeded; i++)
+        li(class=(index === i) ? 'active' : '')
+          a(href=`/books/page/${i}`) #{i}
