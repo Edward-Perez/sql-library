@@ -1,59 +1,36 @@
-const express = require('express');
-const app = express();
-const db = require('./models/index.js').sequelize;
-const bodyParser = require('body-parser');
-const routes = require('./routes/index.js');
+var express = require('express'),
+    app = express(),
+    path = require('path'),
+    db = require('./models/index.js').sequelize;
+    
+const createError = require('./helperFunctions').createError;
 const port = 3000;
  
-// Body Parser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.set('views', './views')
+app.set("view engine", "pug");
 
-// Pug
-app.set('view engine', 'pug');
+app.use(require('morgan')('dev'));
+app.use(require('body-parser').urlencoded({ extended: false }));
 
-// Static Folder
-app.use(express.static(__dirname + '/public'));
+app.use("/static", express.static(path.join(__dirname, "./public")));
 
-// Routes
-app.use('/', routes);
-app.use(require('./routes'));
-
-// Database connection
 db.authenticate()
   .then(() => console.log('Database connected'))
-  .catch((err) => console.log(err))
+  .catch(err => console.error(err))
 
-// Database sync
 db.sync()
-  .then(() => {
-    app.listen(port, console.log(`Express app is listening on ${port}`));
-  })
-  .catch((err) => console.log(err))
+  .then(() => app.listen(port, console.log(`Express app is listening on ${port}`)))
+  .catch(err => console.error(err))
 
-  // 404 Error
-  app.use( (req, res, next) => {
-    const err = new Error('Not Found');
-    err.status = 404;
-    next(err);
-  }); 
+app.use("/", require('./routes'));
+
+app.use((req, res, next) => { next(createError(404, "Page not found")) })
   
-  // Error Handler
-  app.use( (err, req, res, next) => {
-    if (err.status === 404) {
-      console.error('Error message:', err.message);
-      res.render('page-not-found', {
-        err,
-        pageTitle: '404',
-        status: 404 
-      });
-    } else {
-      console.error('Error message:', err.message);
-      res.render('error', { 
-        err,
-        pageTitle: 'Error',
-        status: 500
-       });
-    }
+app.use((err, req, res, next) => {
+  res.render('error', {       
+    errorMsg: err.message || 'Something went wrong',
+    status: err.status || 500
+    });
   }); 
 
 
