@@ -111,3 +111,6 @@ typings/
 
 # FuseBox cache
 .fusebox/
+
+# Nodemon settings
+nodemon.json
