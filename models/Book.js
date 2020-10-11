@@ -19,6 +19,9 @@ module.exports = (sequelize, DataTypes) => {
     year: {
       type: DataTypes.INTEGER,
       validate: {
+        notEmpty: {
+          msg: "Year is required"
+        },
         isInt: {
           msg: "Numeric values only please"
         }
