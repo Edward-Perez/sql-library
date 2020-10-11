@@ -6,7 +6,7 @@ exports.showList = (req, res) =>
     res.render("index", req.List);
 
 exports.showSearchResults = (req, res) => 
-    res.render("search-results", { 
+    res.render("searchResults", { 
         results: req.searchResults 
     })
 
