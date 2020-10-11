@@ -1,13 +1,6 @@
 extends layout.pug
 block content
 
-  p
-    a.button(href='/books') Home
-  h1 Server Error
-  p Sorry! There was an unexpected error on the server.
-  p Status Code: #{status}
-  br
-  p #{err}
-
-
-
+  .not-found
+    h1 #{errorMsg}
+    p Status Code: #{status}
