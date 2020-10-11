@@ -5,20 +5,21 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "nodemon app.js",
+    "dev": "nodemon --legacy-watch app.js"
   },
   "author": "Edward Perez",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
+    "morgan": "^1.10.0",
     "pug": "^2.0.4",
     "sequelize": "^5.21.4",
     "sequelize-cli": "^5.5.1",
     "sqlite3": "^4.1.1"
   },
   "devDependencies": {
-    "nodemon": "^1.19.4"
+    "nodemon": "^2.0.4"
   }
 }
