@@ -1,27 +1,18 @@
 const Op = require("sequelize").Op;
 const Book = require("../../models").Book; 
-const { createError } = require("../../helperFunctions");
+const { createError, pugBookObject } = require("../../helperFunctions");
 
 exports.showList = (req, res) =>  
-    res.render("index", req.List);
+    res.render("index", pugBookObject(req))
 
 exports.showSearchResults = (req, res) => 
-    res.render("searchResults", { 
-        results: req.searchResults 
-    })
+    res.render("searchResults", pugBookObject(req))
 
 exports.showAddForm = (req, res) => 
-    res.render("addBook", {
-        input: req.body || null, 
-        errorMsg: req.userErrors || null
-    })
+    res.render("addBook", pugBookObject(req))
 
 exports.showEditForm = (req, res) => 
-    res.render("editBook", {
-        book: req.book.dataValues, 
-        input: req.body || null, 
-        errorMsg: req.userErrors || null
-    })
+    res.render("editBook", pugBookObject(req))
 
 exports.add = (req, res, next) => 
     Book.create(req.body)
@@ -58,7 +49,8 @@ exports.search = (req, res, next) =>
         ]
       }
     })
-    .then(Books =>  { req.searchResults = Books.map(arg => arg.dataValues)})
+    .then(Books => Books.map(arg => arg.dataValues))
+    .then(results => { req.searchResults = results })
     .then(next)
     .catch(next)
 
@@ -73,10 +65,9 @@ exports.getList = (req, res, next) => {
         else throw createError(404, "Page not found")
     })
     .then(Books => {
-        req.List = {
-            books: Books.rows.map(book => book.dataValues),
-            total: Books.count,
-            index: parseInt(req.params.pageIndex),
+        req.pagination = {
+            list: Books.rows.map(book => book.dataValues),
+            activeIndex: parseInt(req.params.pageIndex),
             anchorLinksNeeded: Math.ceil(Books.count / limitOfItems) 
         }
     })
