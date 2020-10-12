@@ -10,7 +10,7 @@ block content
           th Year
           th
       tbody
-      each book in books
+      each book in pagination.list
         tr.table__row
           td #{book.title}
           td #{book.author}
@@ -20,6 +20,6 @@ block content
             button.table__button
               a(href=`/books/${book.id}/edit`) EDIT
     ul.table__pagination
-      - for (var i = 1; i <= anchorLinksNeeded; i++)
-        li(class=(index === i) ? 'active' : '')
+      - for (var i = 1; i <= pagination.anchorLinksNeeded; i++)
+        li(class=(pagination.activeIndex === i) ? 'active' : '')
           a(href=`/books/page/${i}`) #{i}
