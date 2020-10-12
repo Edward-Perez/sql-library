@@ -23,16 +23,14 @@ I have been ask to build a dynamic intuitive web application for a fictional lib
   * The following views are present:
     * layout.pug
     * index.pug
-    * new-book.pug
-    * update-book.pug
+    * addBook.pug
+    * editBook.pug
     * error.pug
-    * page-not-found.pug
 * Form Fields
   * Forms employ Sequelize Model validation
-  * title & author fields are required
+  * title, year & author fields are required
 * Errors
-  * Uses a global error handler to render a friendly error page.
-  * Renders a user friendly "Page Not Found" page. 
+  * Uses a global error handler to render a friendly error page. 
 * Layout, CSS and styles
   * General layout matches example markup pages
 
@@ -48,16 +46,17 @@ I have been ask to build a dynamic intuitive web application for a fictional lib
   * Year
 
 ### Installation
+* You must have node install to run this project
 * Clone or Download files
-* Once completed open files in editor and open console
-* To download all dependecies require, inside console type:
+* Once completed open files in editor and open console to the project directory
+* Download the dependencies require by typing from you console:
 ```javascript 
   npm install 
 ``` 
-  * Once completed, to start app type: 
+  * Once completed, to start the app type: 
 ```javascript
   npm start
 ```
 * There will be a message in your console as to which port the app is listening to
-* By default the app listens to port "3000", you can change this option in a global variable named "port"
+* By default the app listens to port "3000", you can change this option in a variable named "port"
 * Open web browser to view the site with the address "http://localhost:(port)/" 
